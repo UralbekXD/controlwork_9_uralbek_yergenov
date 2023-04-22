@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Создание Фотографий
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <form action="{% url 'photo_create' %}" method="POST" enctype="multipart/form-data">
+                {% include 'gallery/includes/photo_form.html' with button_label='Создать' %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

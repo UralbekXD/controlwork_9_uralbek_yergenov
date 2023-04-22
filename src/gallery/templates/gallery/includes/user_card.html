@@ -1,0 +1,15 @@
+<div class="user ps-3 d-flex flex-wrap">
+    <div class="avatar">
+        <img class="avatar user-select-none rounded-circle" src="{{ user_photo.avatar.url }}" alt="avatar" style="width: 50px">
+    </div>
+
+    <div class="text ms-3 flex-grow-1">
+        <div class="username">
+            <strong>
+                <a href="{% url 'profile' user_photo.pk %}">
+                    {{ user_photo.username }}
+                </a>
+            </strong>
+        </div>
+    </div>
+</div>

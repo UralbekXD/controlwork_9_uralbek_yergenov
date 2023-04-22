@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    О фотографий
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card rounded-1">
+                <div class="header px-3 py-2 border-bottom d-flex align-items-center">
+                    <div class="avatar">
+                        <img class="avatar user-select-none rounded-circle" src="{{ photo.author.avatar.url }}" alt="avatar" style="width: 50px">
+                    </div>
+                    <div class="username ms-3">
+                        <strong>
+                            <a href="{% url 'profile' photo.author.pk %}">
+                                {{ photo.author }}
+                            </a>
+                        </strong>
+                    </div>
+
+                    <div class="option ms-auto">
+                        <span role="button" data-bs-target="#options{{ photo.pk }}" data-bs-toggle="modal">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </span>
+                    </div>
+
+                    <div class="modal fade" id="options{{ photo.pk }}">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div class="modal-content">
+                                <ul class="list-group">
+
+                                    <li class="list-group-item position-relative text-center">
+                                        <a href="#" class="text-decoration-none text-black stretched-link">
+                                            Перейти к публикаций
+                                        </a>
+                                    </li>
+
+                                    {% if user == photo.author %}
+                                    <li class="list-group-item position-relative text-center">
+                                        <a href="#" class="text-decoration-none text-black stretched-link">
+                                            <span>Изменить</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item position-relative text-center">
+                                        <a href="#" class="text-decoration-none text-black stretched-link">
+                                            <span>Удалить</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+
+                                    <li class="list-group-item position-relative text-center">
+                                        <a href="" class="text-decoration-none text-black stretched-link">
+                                            <span class="text-danger">Отмена</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="body py-0 d-flex justify-content-center bg-black">
+                    <img class="post-image user-select-none img-fluid" src="{{ photo.photo.url }}" alt="img">
+                </div>
+
+                <div class="footer border-top px-3 pt-2">
+                    <div class="actions d-flex align-items-center mb-2">
+                        {% if photo in user.favourites.all %}
+                            {% include 'gallery/includes/favourite/add.html' %}
+                        {% else %}
+                            {% include 'gallery/includes/favourite/remove.html' %}
+                        {% endif %}
+                    </div>
+
+                    <p class="description">
+                        <strong class="me-1">
+                            {{ photo.author }}
+                        </strong>
+                        {{ photo.description|truncatechars:256 }}
+                    </p>
+
+                    <p class="date text-muted">
+                        {{ photo.created_at }}
+                    </p>
+                </div>
+
+                <div class="favourites d-flex flex-column gap-3 p-2">
+                    <h6>
+                        Пользователи:
+                    </h6>
+                    {% for user_photo in photo.favourites.all %}
+                        {% include 'gallery/includes/user_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
