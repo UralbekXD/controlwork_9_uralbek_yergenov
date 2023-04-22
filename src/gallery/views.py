@@ -1,6 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Photo
 from .forms import PhotoForm
@@ -22,6 +23,11 @@ class PhotoDetailView(DetailView):
     model = Photo
     template_name = 'gallery/detail.html'
     context_object_name = 'photo'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_obj'] = self.request.user
+        return context
 
 
 class PhotoAddView(CreateView):
@@ -54,3 +60,31 @@ class PhotoEditView(UpdateView):
 class PhotoDeleteView(DeleteView):
     model = Photo
     success_url = reverse_lazy('index')
+
+
+class AddFavouriteView(View):
+    def post(self, request, *args, **kwargs):
+        user_id = self.request.user.pk
+        user = get_user_model().objects.get(pk=user_id)
+        photo = Photo.objects.get(pk=kwargs.get('pk'))
+        print(photo)
+
+        photo.favourites.add(user)
+
+        # Redirect to the same page
+        return redirect('photo_detail', pk=kwargs.get('pk'))
+
+
+class RemoveFavouriteView(View):
+    def post(self, request, *args, **kwargs):
+        account = get_user_model()
+        user_id = self.request.user.pk
+        user = account.objects.get(pk=user_id)
+        photo = Photo.objects.get(pk=kwargs.get('pk'))
+        print(photo)
+
+        # user.favourites.remove(photo)
+        photo.favourites.remove(user)
+
+        # Redirect to the same page
+        return redirect('photo_detail', pk=kwargs.get('pk'))

@@ -68,10 +68,10 @@
 
                 <div class="footer border-top px-3 pt-2">
                     <div class="actions d-flex align-items-center mb-2">
-                        {% if photo in user.favourites.all %}
-                            {% include 'gallery/includes/favourite/add.html' %}
-                        {% else %}
+                        {% if photo in user_obj.favourites.all %}
                             {% include 'gallery/includes/favourite/remove.html' %}
+                        {% else %}
+                            {% include 'gallery/includes/favourite/add.html' %}
                         {% endif %}
                     </div>
 

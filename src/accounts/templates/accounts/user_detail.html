@@ -41,11 +41,11 @@
     <div class="row mt-5 justify-content-center">
         <div class="col-12">
             <div class="row g-3">
-{#                {% for user_post in user_obj.pictures.all %}#}
-{#                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch">#}
-{#                        {% include 'accounts/includes/post_mini_card.html' %}#}
-{#                    </div>#}
-{#                {% endfor %}#}
+                {% for user_favourite in user_obj.favourites.all %}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch">
+                        {% include 'accounts/includes/post_mini_card.html' %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

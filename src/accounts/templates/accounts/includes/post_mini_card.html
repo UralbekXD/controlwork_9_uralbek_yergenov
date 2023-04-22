@@ -1,4 +1,4 @@
 <div class="mini-post position-relative">
-    <a href="#" class="stretched-link"></a>
-    <img src="{{ user_post.images.url }}" class="img-fluid user-select-none" alt="post">
+    <a href="{% url 'photo_detail' user_favourite.pk %}" class="stretched-link"></a>
+    <img src="{{ user_favourite.photo.url }}" class="img-fluid user-select-none" alt="post">
 </div>

@@ -2,8 +2,6 @@ from django.urls import path
 
 from .views import SignUpView, LoginView, logout_view
 from .views import ProfileDetailView, ProfileEditView
-from .views import FollowUserView
-from .views import UnfollowUserView
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),

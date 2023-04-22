@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<form action="{% url 'favourite_add' photo.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="border-0 bg-transparent">
+        <i class="fa-regular fa-bookmark fa-xl"></i>
+    </button>
+</form>

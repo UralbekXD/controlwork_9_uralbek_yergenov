@@ -66,35 +66,3 @@ class ProfileEditView(UpdateView):
 
     def get_success_url(self):
         return reverse('profile', kwargs={'pk': self.object.pk})
-
-
-class FollowUserView(View):
-    def post(self, request, *args, **kwargs):
-        user_model = get_user_model()
-
-        # Get instances of accounts.Account
-        to_user_follow = user_model.objects.get(pk=kwargs.get('pk'))
-        from_user_follow = user_model.objects.get(pk=self.request.user.pk)
-
-        # Add followers and following
-        to_user_follow.followers.add(from_user_follow)
-        from_user_follow.following.add(to_user_follow)
-
-        # Redirect to the same page
-        return redirect('profile', pk=to_user_follow.pk)
-
-
-class UnfollowUserView(View):
-    def post(self, request, *args, **kwargs):
-        user_model = get_user_model()
-
-        # Get instances of accounts.Account
-        to_user_unfollow = user_model.objects.get(pk=kwargs.get('pk'))
-        from_user_unfollow = user_model.objects.get(pk=self.request.user.pk)
-
-        # Remove followers and following
-        to_user_unfollow.followers.remove(from_user_unfollow)
-        from_user_unfollow.following.remove(to_user_unfollow)
-
-        # Redirect to the same page
-        return redirect('profile', pk=to_user_unfollow.pk)
