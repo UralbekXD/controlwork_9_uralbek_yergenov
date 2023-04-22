@@ -31,12 +31,15 @@
                                 </a>
                             </li>
 
-                            {% if user == photo.author %}
+                            {% if user == photo.author or perms.gallery.change_photo %}
                             <li class="list-group-item position-relative text-center">
-                                <a href="{% url 'photo_edit' photo.pk %}" class="text-decoration-none text-black stretched-link"">
+                                <a href="{% url 'photo_edit' photo.pk %}" class="text-decoration-none text-black stretched-link">
                                     <span>Изменить</span>
                                 </a>
                             </li>
+                            {% endif %}
+
+                            {% if user == photo.author or perms.gallery.delete_photo %}
                             <li class="list-group-item position-relative text-center">
                                 <form action="{% url 'photo_delete' photo.pk %}" method="POST">
                                     {% csrf_token %}
@@ -63,13 +66,15 @@
         </div>
 
         <div class="footer border-top px-3 pt-2">
-            <div class="actions d-flex align-items-center mb-2">
-                {% if photo in user_obj.favourites.all %}
-                    {% include 'gallery/includes/favourite/remove.html' %}
-                {% else %}
-                    {% include 'gallery/includes/favourite/add.html' %}
-                {% endif %}
-            </div>
+            {% if user.is_authenticated %}
+                <div class="actions d-flex align-items-center mb-2">
+                    {% if photo in user_obj.favourites.all %}
+                        {% include 'gallery/includes/favourite/remove.html' %}
+                    {% else %}
+                        {% include 'gallery/includes/favourite/add.html' %}
+                    {% endif %}
+                </div>
+            {% endif %}
 
             <p class="description">
                 <strong class="me-1">
