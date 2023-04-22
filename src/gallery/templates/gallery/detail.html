@@ -26,28 +26,30 @@
                             <i class="fa-solid fa-ellipsis"></i>
                         </span>
                     </div>
-
                     <div class="modal fade" id="options{{ photo.pk }}">
                         <div class="modal-dialog modal-dialog-centered modal-sm">
                             <div class="modal-content">
                                 <ul class="list-group">
 
                                     <li class="list-group-item position-relative text-center">
-                                        <a href="#" class="text-decoration-none text-black stretched-link">
+                                        <a href="{% url 'photo_detail' photo.pk %}" class="text-decoration-none text-black stretched-link">
                                             Перейти к публикаций
                                         </a>
                                     </li>
 
                                     {% if user == photo.author %}
                                     <li class="list-group-item position-relative text-center">
-                                        <a href="#" class="text-decoration-none text-black stretched-link">
+                                        <a href="{% url 'photo_edit' photo.pk %}" class="text-decoration-none text-black stretched-link">
                                             <span>Изменить</span>
                                         </a>
                                     </li>
                                     <li class="list-group-item position-relative text-center">
-                                        <a href="#" class="text-decoration-none text-black stretched-link">
-                                            <span>Удалить</span>
-                                        </a>
+                                        <form action="{% url 'photo_delete' photo.pk %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="text-decoration-none text-black stretched-link">
+                                                <span>Удалить</span>
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endif %}
 

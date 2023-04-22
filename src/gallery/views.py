@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin, LoginRequiredMixin
 
 from .models import Photo
 from .forms import PhotoForm
@@ -30,7 +31,7 @@ class PhotoDetailView(DetailView):
         return context
 
 
-class PhotoAddView(CreateView):
+class PhotoAddView(LoginRequiredMixin, CreateView):
     model = Photo
     form_class = PhotoForm
     template_name = 'gallery/create.html'
@@ -49,20 +50,36 @@ class PhotoAddView(CreateView):
         })
 
 
-class PhotoEditView(UpdateView):
+class PhotoEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Photo
     form_class = PhotoForm
     template_name = 'gallery/edit.html'
     context_object_name = 'photo'
     success_url = reverse_lazy('index')
 
+    def test_func(self):
+        photo_id = self.kwargs.get('pk')
+        photo = Photo.objects.get(pk=photo_id)
 
-class PhotoDeleteView(DeleteView):
+        curr_user = self.request.user
+        targ_user = photo.author
+        return (targ_user.username == curr_user.username) or curr_user.has_perm('gallery.change_photo')
+
+
+class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Photo
     success_url = reverse_lazy('index')
 
+    def test_func(self):
+        photo_id = self.kwargs.get('pk')
+        photo = Photo.objects.get(pk=photo_id)
 
-class AddFavouriteView(View):
+        curr_user = self.request.user
+        targ_user = photo.author
+        return (targ_user.username == curr_user.username) or curr_user.has_perm('gallery.delete_photo')
+
+
+class AddFavouriteView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         user_id = self.request.user.pk
         user = get_user_model().objects.get(pk=user_id)
@@ -75,7 +92,7 @@ class AddFavouriteView(View):
         return redirect('photo_detail', pk=kwargs.get('pk'))
 
 
-class RemoveFavouriteView(View):
+class RemoveFavouriteView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         account = get_user_model()
         user_id = self.request.user.pk
