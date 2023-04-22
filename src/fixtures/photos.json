@@ -1,0 +1,56 @@
+[
+{
+    "model": "gallery.photo",
+    "pk": 1,
+    "fields": {
+        "photo": "photos/Landscape-Color.jpg",
+        "description": "landscape color",
+        "created_at": "2023-04-22T09:02:53.188Z",
+        "author": 1,
+        "favourites": [
+            2,
+            3,
+            1
+        ]
+    }
+},
+{
+    "model": "gallery.photo",
+    "pk": 2,
+    "fields": {
+        "photo": "photos/2.jpg",
+        "description": "something beautiful",
+        "created_at": "2023-04-22T09:05:15.547Z",
+        "author": 2,
+        "favourites": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "gallery.photo",
+    "pk": 4,
+    "fields": {
+        "photo": "photos/cat.jpg",
+        "description": "cat",
+        "created_at": "2023-04-22T11:07:43.949Z",
+        "author": 2,
+        "favourites": []
+    }
+},
+{
+    "model": "gallery.photo",
+    "pk": 5,
+    "fields": {
+        "photo": "photos/cat_yKhVRbe.jpg",
+        "description": "me",
+        "created_at": "2023-04-22T11:08:56.611Z",
+        "author": 4,
+        "favourites": [
+            4
+        ]
+    }
+}
+]

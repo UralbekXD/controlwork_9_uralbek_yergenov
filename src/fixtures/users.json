@@ -1,0 +1,82 @@
+[
+{
+    "model": "accounts.account",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$L1wB1pP8jlhUYDDv2xx5BS$n3Dx1YYFuJQuFs2+Y+j/k6r9vKcL9a5k6NGS0gr0uJU=",
+        "last_login": "2023-04-22T11:55:57.140Z",
+        "is_superuser": true,
+        "username": "root",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-04-22T08:15:47.433Z",
+        "email": "root@gmail.com",
+        "avatar": "avatars/default.png",
+        "about": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.account",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$rp9MpAaIM21Q79GHpH2UrA$VqAhdEMS+YEA49ji9AIK22G0Mh8k87uo9T83aDc2Zpw=",
+        "last_login": "2023-04-22T11:40:40.145Z",
+        "is_superuser": false,
+        "username": "test",
+        "first_name": "test",
+        "last_name": "testovich",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-22T08:17:04.308Z",
+        "email": "test@gmail.com",
+        "avatar": "avatars/IMG_20201227_021340.jpg",
+        "about": "some description",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.account",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$xCC5CWno6vbVpAYhkDwbfE$fg9J1/qdtCcq2MnFbZlfVkX9Pe/Pftz6wWg8DitTahY=",
+        "last_login": "2023-04-22T11:47:17.555Z",
+        "is_superuser": false,
+        "username": "ural",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-22T08:21:55.271Z",
+        "email": "uralbek@gmail.com",
+        "avatar": "avatars/default.png",
+        "about": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.account",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$KRpttHcSS1fiwMd1ZsL6j2$o+GbHE2AOyrtCIWVpDORFyyVJrTrQhKFSGvEfZYu8w0=",
+        "last_login": "2023-04-22T11:55:44.869Z",
+        "is_superuser": false,
+        "username": "cat",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-22T11:08:45.578Z",
+        "email": "cat@gmail.com",
+        "avatar": "avatars/cat.jpg",
+        "about": "",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
